@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PinPonk</string>
+    <string name="hint1_text"> Player 1 </string>
+    <string name="hint2_text"> Player 2 </string>
+</resources>
