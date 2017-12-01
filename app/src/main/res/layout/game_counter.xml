@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/player1_Layout_GC"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        >
+
+        <TextView
+            android:id="@+id/player1_name_GC"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="Player 1"
+            />
+
+        <TextView
+            android:id="@+id/player1_score_GC"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:text="14"
+            />
+
+        <TextView
+            android:id="@+id/player1_service_GC"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="service"
+            />
+
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="UnDo"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/player2_Layout_GC"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        >
+
+        <TextView
+            android:id="@+id/player2_name_GC"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="Player 2"
+            />
+
+        <TextView
+            android:id="@+id/player2_score_GC"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:text="10"
+            />
+
+        <TextView
+            android:id="@+id/player2_service_GC"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="service"
+            />
+
+
+    </LinearLayout>
+
+</LinearLayout>

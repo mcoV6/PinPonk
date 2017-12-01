@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="Player_width">4</integer>
-    <integer name="Checkbox_width">1</integer>
+    <integer name="Service_width">1</integer>
 </resources>

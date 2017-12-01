@@ -2,4 +2,6 @@
     <string name="app_name">PinPonk</string>
     <string name="hint1_text"> Player 1 </string>
     <string name="hint2_text"> Player 2 </string>
+    <string name="player_1_name">%$s</string>
+    <string name="player_2_name">%$s</string>
 </resources>

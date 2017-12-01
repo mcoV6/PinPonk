@@ -5,12 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.android.pinponk.MainActivity">
+    tools:context="com.example.android.pinponk.MainActivity"
+    android:id="@+id/setting_screen"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+
         >
 
         <TextView
@@ -22,7 +25,7 @@
         <TextView
             android:layout_height="wrap_content"
             android:text="Service"
-            style="@style/check_box"
+            style="@style/Service"
 
             />
 
@@ -36,42 +39,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="16dp"
-        >
-    <EditText
-        android:id="@+id/player1_text_input"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="@string/hint1_text"
-        style="@style/Player_hint_name"
-        />
+        android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/checkBox_p1"
-            style="@style/check_box"
-            />
+        <LinearLayout
+            style="@style/Players_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/player1_input"
+                style="@style/Player_hint_name"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint1_text"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/player2_input"
+                style="@style/Player_hint_name"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint2_text"
+                android:inputType="text" />
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/radio_group_service"
+            style="@style/Service_switch_box"
+            >
+
+            <RadioButton
+                android:id="@+id/radio_p1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <RadioButton
+                android:id="@+id/radio_p2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+        </RadioGroup>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp"
-        >
-    <EditText
-        android:id="@+id/player2_text_input"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="@string/hint2_text"
-        style="@style/Player_hint_name"
-        />
 
-        <CheckBox
-            android:id="@+id/checkBox_p2"
-            style="@style/check_box"
-            />
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
