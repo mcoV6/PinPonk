@@ -5,6 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:id="@+id/popup_service"
+    android:background="@drawable/clear"
+
     >
 
     <RadioGroup
