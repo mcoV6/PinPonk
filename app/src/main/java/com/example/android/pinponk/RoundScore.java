@@ -26,7 +26,7 @@ class RoundScore {
     public int getScore2(){
         return score2;
     }
-    public boolean hasScore_pl1() {return player_1_service;}
+    public boolean p1_hasService() {return player_1_service;}
 
     public void setScore1(int score1){
         this.score1=score1;

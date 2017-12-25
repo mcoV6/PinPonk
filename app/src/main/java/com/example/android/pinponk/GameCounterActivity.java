@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -29,8 +30,8 @@ public class GameCounterActivity extends AppCompatActivity {
 
     private int score_player_1=0;
     private int score_player_2=0;
+    private boolean service_player_1_start;
     private boolean service_player_1;
-    private boolean service_player_1_set;
     private Context gContext;
     private Activity gActivity;
     private LinearLayout pl_1;
@@ -72,9 +73,9 @@ public class GameCounterActivity extends AppCompatActivity {
 
         //find service players 1, 2
         pl_1_service=(TextView) findViewById(R.id.player1_service_GC);
-        pl_2_service=(TextView) findViewById(R.id.player2_service_GC);
-        pl_1_service.setText("Service");
-        pl_2_service.setText("Service");
+        pl_2_service= (TextView) findViewById(R.id.player2_service_GC);
+
+
 
         //find service players 1, 2
         pl_1_setTextView=(TextView) findViewById(R.id.player1_set_GC);
@@ -95,22 +96,26 @@ public class GameCounterActivity extends AppCompatActivity {
         undoTxt=(TextView) findViewById(R.id.undo_GC);
         undoTxt.setOnClickListener(undoListener);
 
-        service_player_1_set=MainActivity.service_player_1_start;
-        showService(service_player_1_set);
+        service_player_1_start=player_1_startWithService();
+        service_player_1=service_player_1_start;
+
+        showService(service_player_1_start);
+
+        Toast.makeText(gContext,"do loop again",Toast.LENGTH_SHORT).show();
     }
 
-    private boolean player_1_hasService(int totalScore){
+    private boolean player_1_hasService(int tScore){
 
         if(score_player_1>(scoreToWin-2) && score_player_2>(scoreToWin-2)){
             //This is service for thigh break
-            if(service_player_1_set){
-                if(((totalScore)%(2*2))<2){
+            if(service_player_1_start){
+                if(((tScore)%(2*2))<2){
                     return true;
                 }else{
                     return false;
                 }
             }else{
-                if(((totalScore)%(2*2))>=2){
+                if(((tScore)%(2*2))>=2){
                     return false;
                 }else {
                     return true;
@@ -119,19 +124,33 @@ public class GameCounterActivity extends AppCompatActivity {
 
         }else{
             //this is normal game
-            if(service_player_1_set){
-                if(((totalScore)%(2*pointsToChangeService))<pointsToChangeService){
+            if(service_player_1_start){
+
+                if(((tScore)%(2*pointsToChangeService))<pointsToChangeService){
                     return true;
                 }else{
                     return false;
                 }
             }else{
-                if(((totalScore)%(2*pointsToChangeService))>=pointsToChangeService){
-                    return false;
-                }else {
+
+                if(((tScore)%(2*pointsToChangeService))>=pointsToChangeService){
                     return true;
+                }else {
+                    return false;
                 }
             }
+        }
+
+
+    }
+
+    private boolean player_1_startWithService(){
+        if(MainActivity.service_player_1_start){
+            if((pl_1_set+pl_2_set)%2==0) return true;
+            return false;
+        }else{
+            if((pl_1_set+pl_2_set)%2==0) return false;
+            return true;
         }
 
 
@@ -148,8 +167,8 @@ public class GameCounterActivity extends AppCompatActivity {
     }
 
     private void changeService(){
-        service_player_1_set=(!service_player_1_set);
-        showService(service_player_1_set);
+        service_player_1_start=(!service_player_1_start);
+        showService(service_player_1_start);
     }
 
     private void upDateSet(){
@@ -157,7 +176,6 @@ public class GameCounterActivity extends AppCompatActivity {
         pl_2_setTextView.setText(""+pl_2_set);
         winMatch();
     }
-
 
     private void winMatch(){
         //check if somebody has won the match
@@ -171,7 +189,7 @@ public class GameCounterActivity extends AppCompatActivity {
         //create pop up window
         LayoutInflater layoutInflater = (LayoutInflater) gContext.getSystemService(LAYOUT_INFLATER_SERVICE);
         ViewGroup container_GC = (ViewGroup) layoutInflater.inflate(R.layout.pop_winner, null);
-        final PopupWindow popupWindow = new PopupWindow(container_GC, 400, 400, true);
+        final PopupWindow popupWindow = new PopupWindow(container_GC, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         // find textView in pop_winner.xml to show winner
         TextView winnerTextView=(TextView) container_GC.findViewById(R.id.winner_message);
         //set text
@@ -203,7 +221,7 @@ public class GameCounterActivity extends AppCompatActivity {
         ViewGroup linearLayout=(ViewGroup) findViewById(R.id.game_counter_layout);
 
 
-        popupWindow.showAtLocation(linearLayout, Gravity.NO_GRAVITY, 1000, 600);
+        popupWindow.showAtLocation(linearLayout, Gravity.CENTER, 0, 0);
         //popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.null));
 
 
@@ -219,16 +237,18 @@ public class GameCounterActivity extends AppCompatActivity {
                 pl_1_set++;
                 upDateSet();
                 resetCounter();
+                //service_player_1_start=player_1_startWithService();
                 changeService();
-                Toast.makeText(gContext,"set = "+pl_1_set+" : "+pl_2_set,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(gContext,"set = "+pl_1_set+" : "+pl_2_set,Toast.LENGTH_SHORT).show();
                 return;
             }else if(score_player_2==scoreToWin){
                 // player 2 won set
                 pl_2_set++;
                 upDateSet();
                 resetCounter();
+                //service_player_1_start=player_1_startWithService();
                 changeService();
-                Toast.makeText(gContext,"set = "+pl_1_set+" : "+pl_2_set,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(gContext,"set = "+pl_1_set+" : "+pl_2_set,Toast.LENGTH_SHORT).show();
                 return;
             }else{
                 return;
@@ -238,15 +258,17 @@ public class GameCounterActivity extends AppCompatActivity {
                     pl_1_set++;
                     upDateSet();
                     resetCounter();
+                    //service_player_1_start=player_1_startWithService();
                     changeService();
-                    Toast.makeText(gContext,"set = "+pl_1_set+" : "+pl_2_set,Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(gContext,"set = "+pl_1_set+" : "+pl_2_set,Toast.LENGTH_SHORT).show();
                     return;
             }else if(score_player_2>(score_player_1+1)){
                     pl_2_set++;
                     upDateSet();
                     resetCounter();
+                    //service_player_1_start=player_1_startWithService();
                     changeService();
-                    Toast.makeText(gContext,"set = "+pl_1_set+" : "+pl_2_set,Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(gContext,"set = "+pl_1_set+" : "+pl_2_set,Toast.LENGTH_SHORT).show();
                     return;
             }else{
                 return;
@@ -279,9 +301,6 @@ public class GameCounterActivity extends AppCompatActivity {
     }
 
 
-
-
-
     View.OnClickListener score =new View.OnClickListener(){
         @Override
         public void onClick(View view) {
@@ -293,8 +312,10 @@ public class GameCounterActivity extends AppCompatActivity {
 
                 pl_1_score.setText(""+(++score_player_1));
                 totalScore=score_player_1+score_player_2;
-                addToList=scoreList.add(new RoundScore(score_player_1,score_player_2,player_1_hasService(totalScore)));
-                showService(player_1_hasService(totalScore));
+                //Toast.makeText(gContext,"service player 1 = "+service_player_1,Toast.LENGTH_SHORT).show();
+                service_player_1=player_1_hasService(totalScore);
+                addToList=scoreList.add(new RoundScore(score_player_1,score_player_2,service_player_1));
+                showService(service_player_1);
                 winSet();
 
             }else if(view.getId()==findViewById(R.id.player2_Layout_GC).getId()){
@@ -302,8 +323,10 @@ public class GameCounterActivity extends AppCompatActivity {
 
                 pl_2_score.setText(""+(++score_player_2));
                 totalScore=score_player_1+score_player_2;
-                addToList=scoreList.add(new RoundScore(score_player_1,score_player_2,player_1_hasService(totalScore)));
-                showService(player_1_hasService(totalScore));
+               //Toast.makeText(gContext,"service player 1 = "+service_player_1,Toast.LENGTH_SHORT).show();
+                service_player_1=player_1_hasService(totalScore);
+                addToList=scoreList.add(new RoundScore(score_player_1,score_player_2,service_player_1));
+                showService(service_player_1);
                 winSet();
 
             }else{
@@ -314,7 +337,7 @@ public class GameCounterActivity extends AppCompatActivity {
             //buttonName=view.getResources().getResourceEntryName(view.getId());
             //Toast.makeText(gContext,"total scored points = "+(score_player_1+score_player_2),Toast.LENGTH_SHORT).show();
             //Toast.makeText(gContext, (R.id.player1_service_GC),Toast.LENGTH_SHORT).show();
-            Toast.makeText(gContext,"add to list= "+addToList+ " index "+scoreList.size(),Toast.LENGTH_SHORT).show();
+           // Toast.makeText(gContext,"add to list= "+addToList+ " index "+scoreList.size(),Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -336,20 +359,18 @@ public class GameCounterActivity extends AppCompatActivity {
                 score_player_2=scoreList.get((roundBefore)).getScore2();
                 pl_1_score.setText(""+(score_player_1));
                 pl_2_score.setText(""+(score_player_2));
-                Toast.makeText(gContext,""+lastRound+" round, score=> "+scoreList.get(roundBefore).getScore1()
-                        +": "+scoreList.get(roundBefore).getScore2(),Toast.LENGTH_SHORT).show();
+                showService(scoreList.get((roundBefore)).p1_hasService());
+                //Toast.makeText(gContext,""+lastRound+" round, score=> "+scoreList.get(roundBefore).getScore1()
+                        //+": "+scoreList.get(roundBefore).getScore2(),Toast.LENGTH_SHORT).show();
             }
         }
     };
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_counter);
-
         // starting initiation
         initiate();
         scoreList=new ArrayList<RoundScore>();

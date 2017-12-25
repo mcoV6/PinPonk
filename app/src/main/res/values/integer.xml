@@ -2,4 +2,10 @@
 <resources>
     <integer name="Player_width">4</integer>
     <integer name="Service_width">1</integer>
+    <integer name="PlayerScore_width">3</integer>
+    <integer name="SetService_width">1</integer>
+    <integer name="PlayerHeight_GC">3</integer>
+    <integer name="UnDoHeight_GC">1</integer>
+    <integer name="PlayerNameHeight_GC">2</integer>
+    <integer name="ScoreHeight_GC">3</integer>
 </resources>

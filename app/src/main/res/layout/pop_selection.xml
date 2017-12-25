@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:id="@+id/popup_service"
-    android:background="@drawable/clear"
+    android:background="@drawable/back_color_popup"
+    android:windowFullscreen="true"
 
     >
 
     <RadioGroup
-
         android:id="@+id/radio_group_service_pop"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:text="Player 2"
+        android:gravity="center_vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         >
 
         <RadioButton
@@ -39,7 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start"
+        android:layout_below="@id/radio_group_service_pop"
+        android:layout_centerHorizontal="true"
         />
 
-
-</LinearLayout>
+</RelativeLayout>

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -121,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                     LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
                     container = (ViewGroup) layoutInflater.inflate(R.layout.pop_selection,null);
 
-                    popupWindow = new PopupWindow(container, 400, 400, true);
+                    popupWindow = new PopupWindow(container, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
                     RadioButton rb_1= container.findViewById(R.id.radio_p11);
                     RadioButton rb_2= container.findViewById(R.id.radio_p22);
                     rb_1.setText(player_1_name);
@@ -158,11 +160,11 @@ public class MainActivity extends AppCompatActivity {
                     };
 
                     start_popUp.setOnClickListener(popOnClickList);
-                    popupWindow.setOutsideTouchable(false);
+                    //popupWindow.setOutsideTouchable(false);
                    // popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.clear,R.style.pla));
 
 
-                    popupWindow.showAtLocation(linearLayout, Gravity.NO_GRAVITY, 1000, 600);
+                    popupWindow.showAtLocation(linearLayout, Gravity.CENTER, 0, 0);
 
 
                 }
