@@ -3,6 +3,7 @@ package com.example.android.pinponk;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -14,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +35,8 @@ public class GameCounterActivity extends AppCompatActivity {
     private int score_player_2=0;
     private boolean service_player_1_start;
     private boolean service_player_1;
+    boolean player1_ser;
+    boolean player2_ser;
     private Context gContext;
     private Activity gActivity;
     private LinearLayout pl_1;
@@ -44,6 +49,7 @@ public class GameCounterActivity extends AppCompatActivity {
     private TextView pl_2_setTextView;
     private TextView pl_1_service;
     private TextView pl_2_service;
+
 
     private int pl_1_set=0;
     private int pl_2_set=0;
@@ -102,6 +108,8 @@ public class GameCounterActivity extends AppCompatActivity {
         showService(service_player_1_start);
 
         Toast.makeText(gContext,"do loop again",Toast.LENGTH_SHORT).show();
+
+
     }
 
     private boolean player_1_hasService(int tScore){
@@ -283,6 +291,7 @@ public class GameCounterActivity extends AppCompatActivity {
         pl_2_set=0;
         pl_1_setTextView.setText(""+pl_1_set);
         pl_2_setTextView.setText(""+pl_2_set);
+        showServicePopup();
     }
 
     private void resetCounter(){
@@ -300,6 +309,85 @@ public class GameCounterActivity extends AppCompatActivity {
         startActivity(mainActivity);
     }
 
+
+
+    private void showServicePopup(){
+
+
+        //create pop up window
+        LayoutInflater layoutInflater = (LayoutInflater) gContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+        ViewGroup container_RM = (ViewGroup) layoutInflater.inflate(R.layout.pop_selection, null);
+        final PopupWindow popupRematch = new PopupWindow(container_RM, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+
+        RadioButton rb_1= container_RM.findViewById(R.id.radio_p11);
+        RadioButton rb_2= container_RM.findViewById(R.id.radio_p22);
+        rb_1.setText(player_1_name);
+        rb_2.setText(player_2_name);
+
+        Button start_popUp = container_RM.findViewById(R.id.start_button_pop);
+        final RadioGroup radioService_popUp_RM = container_RM.findViewById(R.id.radio_group_service_pop);
+
+        RadioGroup.OnCheckedChangeListener serviceListener;serviceListener=new RadioGroup.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                View radioButton=radioGroup.findViewById(i);
+                int index =radioGroup.indexOfChild(radioButton);
+
+                if (index==0){
+                    MainActivity.service_player_1_start=true;
+                    MainActivity.service_player_2_start=false;
+                    player1_ser=true;
+                    player2_ser=false;
+                }else if(index==1){
+                    MainActivity.service_player_1_start=false;
+                    MainActivity.service_player_2_start=true;
+                    player1_ser=true;
+                    player2_ser=false;
+                }else{
+                }
+                Toast.makeText(gActivity,"player "+index,Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        radioService_popUp_RM.setOnCheckedChangeListener(serviceListener);
+
+        LinearLayout linearLayout_RM = (LinearLayout) findViewById(R.id.game_counter_layout);
+
+        popupRematch.showAtLocation(linearLayout_RM, Gravity.CENTER, 0, 0);
+        //popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.null));
+        radioService_popUp_RM.setOnCheckedChangeListener(serviceListener);
+
+        //linearLayout = (LinearLayout) findViewById(R.id.setting_screen);
+        //Toast.makeText(getApplicationContext(), "ahoj", Toast.LENGTH_SHORT).show();
+
+        View.OnClickListener popOnClickList=new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                String service_player="";
+                if(player1_ser){
+                    popupRematch.dismiss();
+                    startActivity(new Intent(gActivity, GameCounterActivity.class));
+                }else if(player2_ser){
+                    service_player=player_2_name+" has a servise";
+                    popupRematch.dismiss();
+                    startActivity(new Intent(gActivity, GameCounterActivity.class));
+                }else{
+                    service_player="Please choose one of them";
+                }
+                Toast.makeText(getApplicationContext(),service_player,Toast.LENGTH_SHORT).show();
+                //popupWindow.dismiss();
+            }
+        };
+
+        start_popUp.setOnClickListener(popOnClickList);
+        //popupWindow.setOutsideTouchable(false);
+        // popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.clear,R.style.pla));
+
+
+
+
+    }
 
     View.OnClickListener score =new View.OnClickListener(){
         @Override
@@ -372,6 +460,29 @@ public class GameCounterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_counter);
         // starting initiation
+        RadioGroup.OnCheckedChangeListener serviceListener=new RadioGroup.OnCheckedChangeListener(){
+            boolean player1_ser;
+            boolean player2_ser;
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                View radioButton=radioGroup.findViewById(i);
+                int index =radioGroup.indexOfChild(radioButton);
+
+                if (index==0){
+                    MainActivity.service_player_1_start=true;
+                    MainActivity.service_player_2_start=false;
+                    player1_ser=true;
+                    player2_ser=false;
+                }else if(index==1){
+                    MainActivity.service_player_1_start=false;
+                    MainActivity.service_player_2_start=true;
+                    player1_ser=true;
+                    player2_ser=false;
+                }else{
+                }
+                Toast.makeText(gActivity,"player "+index,Toast.LENGTH_SHORT).show();
+            }
+        };
         initiate();
         scoreList=new ArrayList<RoundScore>();
 
