@@ -20,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,8 +48,8 @@ public class GameCounterActivity extends AppCompatActivity {
     private TextView pl_2_score;
     private TextView pl_1_setTextView;
     private TextView pl_2_setTextView;
-    private TextView pl_1_service;
-    private TextView pl_2_service;
+    private ViewGroup pl_1_service;
+    private ViewGroup pl_2_service;
 
 
     private int pl_1_set=0;
@@ -78,8 +79,8 @@ public class GameCounterActivity extends AppCompatActivity {
         player2Text.setText(MainActivity.player_2_name);
 
         //find service players 1, 2
-        pl_1_service=(TextView) findViewById(R.id.player1_service_GC);
-        pl_2_service= (TextView) findViewById(R.id.player2_service_GC);
+        pl_1_service=(ViewGroup) findViewById(R.id.player1_service_GC);
+        pl_2_service= (ViewGroup) findViewById(R.id.player2_service_GC);
 
 
 

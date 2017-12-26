@@ -28,20 +28,36 @@
                 android:id="@+id/player1_name_GC"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="@integer/PlayerScore_width"
+                android:layout_weight="@integer/Player_width"
+                style="@style/Player_name_GC"
 
                 />
 
-
-            <TextView
+            <LinearLayout
                 android:id="@+id/player1_service_GC"
                 android:layout_width="0dp"
-                android:layout_weight="@integer/SetService_width"
+                android:layout_weight="@integer/Service_width"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="Service"
-                android:background="@drawable/service_ball"
+                style="@style/Service_text"
                 />
+
+                <TextView
+                    android:layout_width="@dimen/service_ball_dim"
+                    android:layout_height="@dimen/service_ball_dim"
+                    android:layout_gravity="center"
+                    android:background="@drawable/service_ball"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -51,22 +67,49 @@
             android:layout_weight="@integer/ScoreHeight_GC"
             android:orientation="horizontal"
             >
+            <TextView
+                android:text="Points:"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                style="@style/Points_GC"
+                />
 
         <TextView
             android:id="@+id/player1_score_GC"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
             android:layout_weight="@integer/PlayerScore_width"
-
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="0"
+            style="@style/Player_score_GC"
             />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="@integer/SetService_width"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Set"
+                android:gravity="center"
+                style="@style/Set_GC"
+                />
             <TextView
                 android:id="@+id/player1_set_GC"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="@integer/SetService_width"
-
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                style="@style/Player_set_GC"
                 />
 
+        </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
@@ -79,6 +122,8 @@
         android:layout_weight="@integer/UnDoHeight_GC"
         android:gravity="center"
         android:text= "Undo"
+        style="@style/UnDo_GC"
+        android:background="@color/colorUndo"
         />
 
     <LinearLayout
@@ -101,19 +146,36 @@
                 android:id="@+id/player2_name_GC"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="@integer/PlayerScore_width"
+                android:layout_weight="@integer/Player_width"
+                style="@style/Player_name_GC"
 
                 />
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/player2_service_GC"
                 android:layout_width="0dp"
-                android:layout_weight="@integer/SetService_width"
+                android:layout_weight="@integer/Service_width"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:background="@drawable/service_ball"
-                android:text="service"
-                />
+                android:orientation="vertical"
+                >
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Service"
+                    style="@style/Service_text"
+                    />
+
+                <TextView
+                    android:layout_width="@dimen/service_ball_dim"
+                    android:layout_height="@dimen/service_ball_dim"
+                    android:layout_gravity="center"
+                    android:background="@drawable/service_ball"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -123,26 +185,49 @@
             android:layout_weight="@integer/ScoreHeight_GC"
             android:orientation="horizontal"
             >
+            <TextView
+                android:text="Points:"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                style="@style/Points_GC"
+                />
 
             <TextView
                 android:id="@+id/player2_score_GC"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:layout_weight="@integer/PlayerScore_width"
-
+                android:layout_height="match_parent"
+                android:gravity="center"
+                style="@style/Player_score_GC"
                 />
 
-
-            <TextView
-                android:id="@+id/player2_set_GC"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="@integer/SetService_width"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Set"
+                    android:gravity="center"
+                    style="@style/Set_GC"
+                    />
+                <TextView
+                    android:id="@+id/player2_set_GC"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    style="@style/Player_set_GC"
+                    />
 
-                />
-
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
-
 </LinearLayout>
